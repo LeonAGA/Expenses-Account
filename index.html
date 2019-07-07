@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,400" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+    <title>Expense Account</title>
+  </head>
+
+  <body>
+    <div class="container">
+        <header>
+            <h1 class="text-center">Expense Account</h1>
+        </header>
+        <section class="mainContent">
+            <div id= "divMessage" class="text-center alert">
+                <p>#</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="primaryContent">
+                        <h2 class="text-center">Add your expenses here:</h2>
+                            <form id="addExpense" action="#">
+                                <div class="form-group">
+                                    <label for="reason">Reason:</label>
+                                    <input type="text" class="form-control" id="reason" placeholder="Name of your expense.">
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount">Amount:</label>
+                                    <input type="text" class="form-control" id="amount" placeholder="Amount $">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </form>                        
+                    </div> <!--.content-->
+                </div> <!--.col1-->
+
+                <div class="col">
+                    <div class="secondaryContent">
+                        <h2 class="text-center">List</h2>
+                        <div id="budget" class="budget">
+                            <div class="alert alert-primary">
+                                <input type="text" class="form-control" id="newBudget" placeholder = "Press enter to submit the new Budget.">
+                                <p class="d-flex">Budget: $ <span id="total"></span><button type="button" id ="edit" class="ml-auto p-0 btn btn-default btn-sm">
+                                    <span class="fa fa-edit"></span> Edit
+                                    </button>
+                                </p>
+                            </div>
+                            <div class="remaining alert alert-success">
+                                <p>Remaining: $ <span id="remaining"></span></p>
+                            </div>  
+                        </div> <!--.budget-->
+                        <div id="expenses">
+                            <ul class="list-group"></ul>
+                        </div>
+                    </div> <!--.content-->
+                </div><!--.col2-->
+            </div> <!--.row-->
+        </section>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

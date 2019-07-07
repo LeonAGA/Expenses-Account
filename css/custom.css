@@ -1,0 +1,120 @@
+/*--------------------------------Custom Properties------------------------------------*/
+:root{
+    --background1: #0083B0;
+    --background2: #00B4DB;
+    --appBackgroud: #FFFFFF;
+    --tittle1: #FFFFFF; 
+    --tittle2: #004e92;
+    --button:#B91C00; 
+    --buttonOver: #FA2600;
+}
+
+body {
+    background: var(--background1);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, var(--background1), var(--background2));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, var(--background1), var(--background2)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */        
+}
+
+header {
+    margin: 30px 0;
+}
+
+.content {
+    padding: 20px;
+}
+
+.mainContent{
+    background-color: var(--appBackgroud);
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.budget{
+    padding-top: 32px;
+}
+
+.budget p{
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.budget p span {
+    font-weight: normal;
+}
+
+#expenses {
+    margin-bottom: 30px;
+}
+
+h1{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+    color: var(--tittle1);
+}
+
+h2 {
+    font-weight: 100;
+    color: var(--tittle2);
+    font-size: 22px;
+    margin-bottom:30px;
+}
+
+#edit{
+    display: none;  
+    color: var(--tittle2);
+}
+
+#newBudget{
+    display: none;
+    color: var(--tittle2);
+}
+
+.delete-expense{
+    padding: 5px;
+    text-align: center;
+    width: 30px;
+    color: #FFFFFF !important;
+    font-weight: bold;
+    background-color: var(--button); 
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    animation-name: appear;
+	animation-duration: 0.35s;
+	animation-timing-function: cubic-bezier(0,0.51,0.31,1.51);
+	animation-fill-mode: forwards;
+    /*Chrome*/
+    -webkit-transition: background-color .2s linear 0s;
+    /*Firefox*/
+    -moz-transition: background-color .2s linear 0s;
+    /*Opera*/
+    -o-transition: background-color .2s linear 0s;
+    /*Standard*/
+    transition: background-color .2s linear 0s;
+}
+
+#divMessage{
+    opacity: 0;
+    transition: opacity .5s linear 0s;
+}
+
+.delete-expense:hover{
+
+    background-color: var(--buttonOver);
+}
+
+.delete-expense:active{
+  -ms-transform: scale(2, 3); 
+  -webkit-transform: scale(2, 3); 
+  transform: scale(5, 5);
+}
+
+@keyframes appear {
+    from {transform: scale(0);}
+    to {transform: scale(1);}
+}
