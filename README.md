@@ -1,5 +1,5 @@
 <p align="center">
-   <img alt="SigmaΣCode" src="/img/capture/SigmaΣCode.png">
+   <img alt="SigmaΣCode" src="/img/captures/SigmaΣCode.png">
 </p>
    </br>
 <h6 align = "center">SigmaΣCode</h6>
@@ -14,7 +14,7 @@
 ## Captures
 
 <p align="center">
-    <img src="img/capture/expenses.PNG">
+    <img src="img/captureS/expenses.png">
 </p>
 
 ## Features
