@@ -26,7 +26,8 @@
 
 ## See it online
 
-- [`netlify`](https://expensesaccount.netlify.com/)  
+- [`netlify`](https://expensesaccount.netlify.com/)
+- [`codepen`](https://codepen.io/LeonAGA/pen/rEqdPG)
 
 ## Links to other proyects
 
