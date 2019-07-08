@@ -14,7 +14,7 @@
 ## Captures
 
 <p align="center">
-    <img src="img/captureS/expenses.PNG">
+    <img src="img/captures/expenses.PNG">
 </p>
 
 ## Features
