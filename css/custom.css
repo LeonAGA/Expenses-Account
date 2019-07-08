@@ -72,11 +72,12 @@ h2 {
 .delete-expense{
     padding: 5px;
     text-align: center;
-    width: 30px;
+    height: 35px;
+    width: 40px;
     color: #FFFFFF !important;
     font-weight: bold;
     background-color: var(--button); 
-    border-radius: 50%;
+    border-radius: 5%;
     cursor: pointer;
     -webkit-user-select: none;
     -khtml-user-select: none;

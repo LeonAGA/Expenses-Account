@@ -1,6 +1,6 @@
 // Variables
 let userBudget = JSON.parse(localStorage.getItem("Budget")) || prompt("This is your first time here, please tell me, how much do we have? $$$$");
-const form = document.getElementById('addExpense');
+const form = document.querySelector('#addExpense');
 const edit = document.querySelector('#edit');
 const newBudget = document.querySelector('#newBudget');
 let amountBudget;
@@ -10,16 +10,40 @@ let amountBudget;
 class Budget{
 
     constructor(budget, remaining = budget){
-    this.budget = Number(budget);
-    this.remaining = Number(remaining);
+    
+        this.budget = Number(budget);
+        this.remaining = Number(remaining);
     }
+
+    getBudget(){
+
+        return this.budget;
+    }
+
+    getRemaining(){
+
+        return this.remaining;
+    }
+
     //Method to substract from the actual budget.
     remainingBudget(amount = 0, operation = 'substraction'){
+
         operation === 'substraction' ? this.remaining -= Number(amount) : this.remaining += Number(amount);
         
         //Saving the changes in the remaining.
         localStorage.setItem('Budget', JSON.stringify(amountBudget));
         return this.remaining;
+    }
+
+    //Method to change total Budget
+    changetotalBudget(newValue){
+        
+        const expense = this.budget - this.remaining;
+        this.budget = newValue;
+        this.remaining = this.budget - expense;
+        
+        //Saving the changes in the Budget.
+        localStorage.setItem('Budget', JSON.stringify(amountBudget));
     }
 }
 
@@ -58,6 +82,7 @@ class Interface{
 
     //Inserts a new expense to the list.
     addExpenseList(name, amount, previous = false){
+
         const expensesList = document.querySelector('#expenses ul');
 
         if(previous){
@@ -88,6 +113,7 @@ class Interface{
 
     //Removes a new expense to the list.
     removeExpenseList(name, amount){
+
         const expensesLi = document.querySelectorAll('#expenses li');
         const expensesList = document.querySelector('#expenses ul');
         for(let record of expensesLi){
@@ -101,6 +127,7 @@ class Interface{
     
     //Checks the remaining budget after add or remove an expense.
     remainingBudget(amount, operation = 'substraction' ){
+
         const remaining = document.querySelector('#remaining');
         //Read the remaining budget.
         const remainingUserBudget = amountBudget.remainingBudget(amount, operation); 
@@ -112,17 +139,17 @@ class Interface{
     //Change the color of the remaining amount.
     checkBudget(){
 
-        const totalBudget = amountBudget.budget;
-        const remainingBudget = amountBudget.remaining;
+        const totalBudget = amountBudget.getBudget();
+        const remainingBudget = amountBudget.getRemaining();
         const remaining =  document.querySelector('.remaining');
-  
+    
         //Checking the 25%
         if((totalBudget/4) > remainingBudget){
             remaining.classList.remove('alert-success', 'alert-warning');
             remaining.classList.add('alert-danger');
          //Checking the 50%
         } else if((totalBudget/2) > remainingBudget){
-            remaining.classList.remove('alert-success');
+            remaining.classList.remove('alert-success', 'alert-danger');
             remaining.classList.add('alert-warning');
         }else{
             remaining.classList.add('alert-success');
@@ -132,6 +159,7 @@ class Interface{
     }
 
     editBudget(action){
+
         const oldBudget = document.querySelector('#total').parentElement; 
         const newBudget = document.querySelector('#newBudget');
         if (action === 'cancel'){
@@ -157,21 +185,30 @@ document.addEventListener('DOMContentLoaded', function(){
 if(userBudget === null || userBudget === ''){
     window.location.reload();
 }else if(typeof(userBudget) == 'string'){
-    userBudget = userBudget.replace(/[^\d]/g,'');
+    userBudget = userBudget.replace(/\s+/g,'').replace(/[^\d.-]/g,'').replace(/\.{2,}/g,'');
+    userBudget = userBudget.split('');
+    for(x = 0; x < userBudget.length ; x++){
+         if( x > 0 && userBudget[x] == "-"){
+             userBudget.splice(x,1);
+             x--;
+         }
+     }
+     userBudget = userBudget.join('');
     //Instance of budget with the global variable.
     amountBudget = new Budget(userBudget);
     //Saving the budget object.
     localStorage.setItem('Budget', JSON.stringify(amountBudget));
     //Instance of interface
     const ui = new Interface();
-    ui.insertBudget(amountBudget.budget);
+    ui.insertBudget(amountBudget.getBudget());
+    ui.checkBudget();
     
 }else{
     //Assigning the reference object to amountBudge
     amountBudget = new Budget(userBudget.budget, userBudget.remaining);
     //Instance of interface
     const ui = new Interface();
-    ui.insertBudget(amountBudget.budget,userBudget.remaining);
+    ui.insertBudget(amountBudget.getBudget(), amountBudget.getRemaining());
     ui.addExpenseList('Na','Na',true);
     ui.checkBudget();
 }
@@ -200,10 +237,12 @@ if(reasonName === ''){
 });
 
 document.querySelector('#budget').addEventListener('mouseover', function(){
+
     edit.style.display ="block";
 });
 
 document.querySelector('#budget').addEventListener('mouseout', function(){
+
     document.querySelector('#edit').style.display ="none";
 });
 
@@ -237,17 +276,30 @@ document.body.addEventListener('click', function(e){
 newBudget.addEventListener('keypress' , function(e){
     
     if (e.keyCode === 13){
-        const newValue = newBudget.value.replace(/[^\d]/g,'');
-        newBudget.value = '';
-        const ui = new Interface();
-
+        
+        const oldValue = amountBudget.getBudget();
+        let newValue = newBudget.value.replace(/\s+/g,'').replace(/[^\d.-]/g,'').replace(/\.{2,}/g,'');
+        newValue = newValue.split('');
+        for(x = 0; x < newValue.length ; x++){
+             if( x > 0 && newValue[x] == "-"){
+                 newValue.splice(x,1);
+                 x--;
+             }
+         }
+         newValue = newValue.join('');
+         newBudget.value = '';
+         const ui = new Interface();
         if (edit.hasAttribute('cancel') && newValue !== ''){
-            amountBudget.budget = newValue;
-            ui.insertBudget(amountBudget.budget,userBudget.remaining);
-            ui.checkBudget();
-            localStorage.setItem('Budget', JSON.stringify(amountBudget));
+
+            if(confirm('Do you really want to change your current Budget amount?')){
+                amountBudget.changetotalBudget(newValue);
+                ui.insertBudget(amountBudget.getBudget(),amountBudget.getRemaining());
+                ui.checkBudget();
+                ui.printMessage('The Budget amount has been changed', 'success');
+            }
         }else{
             ui.printMessage('Please write a number','error')
         }
+        ui.editBudget('edit')
     }
 });
